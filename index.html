@@ -106,23 +106,30 @@ no.onmouseover = () => {
     no.style.top = y + "px";
 };
 
-function sendAnswers() {
 
-    let message = "Her Answers:\n\n";
+    function sendAnswers() {
+
+    let message = "";
 
     answers.forEach((ans, i) => {
         message += (i + 1) + ". " + ans + "\n\n";
     });
 
-    const email = "walidlaallam998@gmail.com";
-
-    window.location.href =
-        `mailto:${email}?subject=Her Answers ❤️&body=${encodeURIComponent(message)}`;
+    fetch("https://formspree.io/f/abcd1234", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            message: message
+        })
+    });
 
     question.innerText = "Thank you for not saying no to me 😂❤️ I love you so much 💖";
 
     yes.style.display = "none";
     no.style.display = "none";
+
 }
 
 </script>
